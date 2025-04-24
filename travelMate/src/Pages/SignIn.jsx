@@ -4,8 +4,9 @@ import Button from "../Components/Button";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Mail, Lock } from "lucide-react";
-
+import { useAuth } from "../Store/Auth";
 function SignIn() {
+  const { storeToken } = useAuth()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -22,7 +23,30 @@ function SignIn() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    navigate("/tour");
+    e.preventDefault()
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/signin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password
+        })
+      });
+      const data = await response.json()
+      if (!response) {
+        throw new Error(data.message || 'Signin failed');
+      }
+      console.log(data)
+      storeToken(data.token)
+
+      navigate('/tour')
+
+
+    } catch (error) {
+      console.error('Error during signin:', error.message);
+
+    }
   };
 
   return (

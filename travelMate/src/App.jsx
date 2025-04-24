@@ -8,6 +8,8 @@ import SignUp from './Pages/SignUp'
 import SignIn from './Pages/SignIn'
 import DestinationDetail from './Pages/DestinationDetail'
 import TourDetail from './Pages/TourDetail'
+import Logout from './Pages/Logout'
+import ReceiptDetail from './Pages/ReceiptDetail'
 
 const App = () => (
   <Router>
@@ -17,6 +19,8 @@ const App = () => (
       <Route path='/tour/:name' element={<DestinationDetail />} />
       <Route path='/signup' element={<SignUp />} />
       <Route path='/signin' element={<SignIn />} />
+      <Route path='/logout' element={<Logout />} />
+      <Route path='/receipt' element={<ReceiptDetail />} />
       <Route path='/tour/:name/:title' element={<TourDetail />} />
     </Routes>
   </Router>
