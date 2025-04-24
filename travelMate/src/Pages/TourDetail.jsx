@@ -61,7 +61,7 @@ function TourDetail() {
                 whileHover={{ y: -5 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 10 }}
               >
-                <BookingForm country='Pakistan' place={tourTitle} />
+                <BookingForm />
               </motion.div>
             </motion.div>
           </motion.div>
