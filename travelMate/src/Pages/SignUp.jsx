@@ -24,7 +24,36 @@ function SignUp() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    navigate("/");
+    e.preventDefault(); // Also needed to prevent form refresh
+
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: formData.email,
+          name: formData.name,
+          password: formData.password
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Signup failed');
+      }
+
+      console.log('Signup success:', data);
+      navigate('/SignIn')
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      })
+    } catch (error) {
+      console.error('Error during signup:', error.message);
+    }
   };
 
   return (
@@ -162,6 +191,7 @@ function SignUp() {
                     bgColor="bg-[#48e2d7]"
                     color="text-[#f0f8ff]"
                     type="submit"
+
                   >
                     Sign Up
                   </Button>

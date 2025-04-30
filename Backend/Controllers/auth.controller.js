@@ -162,7 +162,7 @@ export const getReceipts = async (req, res) => {
     const receipts = await Receipt.find();
     console.log(receipts);
     if (receipts.length === 0) {
-      return res.status(200).json({ message: "No receipts Found", receipts });
+      return res.status(400).json({ message: "No receipts Found", receipts });
     }
     res.status(200).json({ receipts });
   } catch (error) {
