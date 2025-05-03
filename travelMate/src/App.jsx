@@ -16,11 +16,10 @@ const App = () => (
   <Router>
     <Routes>
       <Route path='/' element={<Home />} />
-      <Route path='/tour' element={<Tours />} />
-
-      <Route path='/tour/:name' element={<DestinationDetail />} />
       <Route path='/signup' element={<SignUp />} />
       <Route path='/signin' element={<SignIn />} />
+      <Route path='/tour' element={<Tours />} />
+      <Route path="/tour/:country" element={<DestinationDetail />} />
       <Route path='/logout' element={<Logout />} />
       <Route path='/bookings' element={<ReceiptDetail />} />
       <Route path='/tour/:name/:title' element={<TourDetail />} />
