@@ -7,16 +7,20 @@ function ReceiptDetail() {
   const [found, setFound] = useState(false)
 
   const { getToken } = useAuth();
+  const { user } = useAuth()
 
   useEffect(() => {
     const fetchReceipts = async () => {
+
       try {
-        const token = getToken();
+
         const response = await fetch('http://localhost:5000/api/auth/user/receipt', {
           method: 'GET',
           headers: {
-            Authorization: `Bearer ${token}`,
-          },
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${getToken()}`,
+          }
+
         });
 
         if (!response.ok) {

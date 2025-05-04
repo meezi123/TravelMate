@@ -11,6 +11,9 @@ import TourDetail from './Pages/TourDetail'
 import Logout from './Pages/Logout'
 import ReceiptDetail from './Pages/ReceiptDetail'
 import SignIn from './Pages/SignIn'
+import AboutUs from './Pages/AboutUs'
+
+
 
 const App = () => (
   <Router>
@@ -20,6 +23,7 @@ const App = () => (
 
       <Route path='/tour/:name' element={<DestinationDetail />} />
       <Route path='/signup' element={<SignUp />} />
+      <Route path='/about' element={<AboutUs />} />
       <Route path='/signin' element={<SignIn />} />
       <Route path='/logout' element={<Logout />} />
       <Route path='/bookings' element={<ReceiptDetail />} />

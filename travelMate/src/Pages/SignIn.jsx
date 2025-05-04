@@ -25,6 +25,7 @@ function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
+      console.log('inside submit')
       const response = await fetch('http://localhost:5000/api/auth/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

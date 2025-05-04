@@ -46,7 +46,7 @@ export default function BookingForm({ country, place }) {
         alert("Booking response: " + result.message);
       }
       alert("Booking response: " + result.message);
-      navigate('/receipt')
+      navigate('/bookings')
     } catch (error) {
       console.error("Error creating booking:", error);
     }

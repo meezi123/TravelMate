@@ -36,7 +36,7 @@ export const authMiddleWare = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const userData = await User.findOne({ email: decoded.email });
     req.user = userData;
-
+    console.log("nexting");
     next(); // Proceed to the next middleware
   } catch (error) {
     console.error("JWT Error:", error.message);

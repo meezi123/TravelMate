@@ -76,6 +76,7 @@ export const verifyEmail = async (req, res) => {
 export const Signin = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log("inside signin route");
 
     // Check if the email exists
     const user = await User.findOne({ email });
@@ -117,9 +118,12 @@ export const user = async (req, res) => {
 };
 export const bookingWithReceipt = async (req, res) => {
   const userId = req.user._id;
+  console.log("inside b&r");
+  console.log("user : ", userId);
 
   try {
     const { country, place, date, travelers, roomType, total } = req.body;
+    console.log("body", req.body);
     // console.log(date, travelers, roomType, total);
     if (!country || !place || !date || !travelers || !roomType || !total) {
       throw new Error("All fields are required");
@@ -135,7 +139,7 @@ export const bookingWithReceipt = async (req, res) => {
     });
     const bookingId = newBooking._id;
 
-    const newReceipt = Receipt.create({
+    const newReceipt = await Receipt.create({
       country: country,
       place: place,
       bookingDate: date,
@@ -158,8 +162,9 @@ export const bookingWithReceipt = async (req, res) => {
 };
 export const getReceipts = async (req, res) => {
   try {
-    console.log("inside getreceipts");
-    const receipts = await Receipt.find();
+    const userData = req.user;
+
+    const receipts = await Booking.find({ user: userData._id });
     console.log(receipts);
     if (receipts.length === 0) {
       return res.status(400).json({ message: "No receipts Found", receipts });

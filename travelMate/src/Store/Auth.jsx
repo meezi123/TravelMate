@@ -5,8 +5,15 @@ export const AuthProvider = ({ children }) => {
   const storeToken = (token) => {
     return localStorage.setItem('token', token)
   }
+  const storeCountry = (country) => {
+    setCountry(country)
+  }
+  const getCountry = () => {
+    return country
+  }
   const [stoken, setStoken] = useState(localStorage.getItem('token'))
   const [user, setUser] = useState('')
+  const [country, setCountry] = useState('')
   const isLoggedIn = !!stoken;
   const getToken = () => {
     if (isLoggedIn) {
@@ -38,7 +45,7 @@ export const AuthProvider = ({ children }) => {
     getUser()
   }, [])
 
-  return <AuthContext.Provider value={{ isLoggedIn, storeToken, logOutUser, user, getToken }}>
+  return <AuthContext.Provider value={{ isLoggedIn, storeToken, logOutUser, user, getToken, storeCountry, getCountry }}>
     {children}
   </AuthContext.Provider>
 }

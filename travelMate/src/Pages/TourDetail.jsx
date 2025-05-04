@@ -3,10 +3,12 @@ import { useParams } from 'react-router-dom';
 import Navbar from '../Components/Navbar';
 import BookingForm from '../Components/BookingFrorm';
 import { motion } from 'framer-motion';
-
+import { useAuth } from '../Store/Auth';
 function TourDetail() {
+  const { getCountry } = useAuth();
   const params = useParams();
   const tourTitle = params.title;
+  console.log('country : ', getCountry())
 
   return (
     <>
@@ -61,7 +63,7 @@ function TourDetail() {
                 whileHover={{ y: -5 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 10 }}
               >
-                <BookingForm />
+                <BookingForm country={getCountry()} place={tourTitle} />
               </motion.div>
             </motion.div>
           </motion.div>
